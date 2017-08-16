@@ -27,8 +27,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/avatar"/>
+            android:layout_centerVertical="true"/>
 
         <!-- info -->
         <LinearLayout
