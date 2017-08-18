@@ -34,20 +34,27 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private static final String TAG = ChipsAdapter.class.toString();
     private static final int TYPE_EDIT_TEXT = 0;
     private static final int TYPE_ITEM = 1;
+    private ColorStateList mHintColor;
+    private ColorStateList mTextColor;
     private Context mContext;
     private ChipsInput mChipsInput;
     private List<ChipInterface> mChipList = new ArrayList<>();
     private String mHintLabel;
+
     private ChipsInputEditText mEditText;
-    private RecyclerView mRecycler;
 
     public ChipsAdapter(Context context, ChipsInput chipsInput, RecyclerView recycler) {
         mContext = context;
         mChipsInput = chipsInput;
         mRecycler = recycler;
         mHintLabel = mChipsInput.getHint();
-        mEditText = mChipsInput.getEditText();
         initEditText();
+    }
+
+    public ChipsAdapter(Context mContext, ChipsInput chipsInput, RecyclerView mRecyclerView, ColorStateList mHintColor, ColorStateList mTextColor) {
+        this(mContext, chipsInput, mRecyclerView);
+        this.mHintColor = mHintColor;
+        this.mTextColor = mTextColor;
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -121,6 +128,12 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     private void initEditText() {
+        mEditText = new ChipsInputEditText(mContext);
+        if(mHintColor != null)
+            mEditText.setHintTextColor(mHintColor);
+        if(mTextColor != null)
+            mEditText.setTextColor(mTextColor);
+
         mEditText.setLayoutParams(new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -367,6 +380,10 @@ public class ChipsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public List<ChipInterface> getChipList() {
         return mChipList;
+    }
+
+    public ChipsInputEditText getEditText() {
+        return mEditText;
     }
 
     private boolean listContains(List<ChipInterface> contactList, ChipInterface chip) {
