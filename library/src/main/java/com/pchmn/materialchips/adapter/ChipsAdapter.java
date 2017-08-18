@@ -1,6 +1,7 @@
 package com.pchmn.materialchips.adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
